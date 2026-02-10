@@ -2,12 +2,16 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const connectDB = require('./config/connectionDB');
-
+const cors = require('cors');
 connectDB();
 
 const PORT = process.env.PORT  || 3000;
 
 app.use(express.json());
+
+app.use(cors ({
+    origin: 'http://localhost:5173',
+}))
 
 app.use('/recipes', require('./routes/recipeRoutes'));
 
