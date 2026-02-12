@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from './Modal';
+import InputForm from './InputForm';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const checklogin = () => {
+    setIsOpen(true);
+  }
   return (
     <>
     <nav className="bg-orange-500 text-white p-4 shadow-md">
@@ -12,11 +19,14 @@ const Navbar = () => {
             <li><a href="/recipes" className="hover:text-orange-200">My Recipes</a></li>
             <li><a href="/favourites" className="hover:text-orange-200">Favourites</a></li>
             <li><a href="/about" className="hover:text-orange-200">About</a></li>
-            <li><a href="/login" className="hover:text-orange-200">Login</a></li>
+            <li onClick={checklogin} className="hover:text-orange-200 cursor-pointer">Login</li>
           </ul>
         </nav>
       </div>
     </nav>
+    {isOpen && <Modal onclose={() => setIsOpen(false)} >
+      <InputForm setIsOpen={() => setIsOpen(false)}/>
+      </Modal>}
     </>
   )
 }
